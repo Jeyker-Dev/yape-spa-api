@@ -24,13 +24,12 @@ class CategoryController extends Controller
     /**
      * Display the specified category for the authenticated user.
      *
-     * @param Request $request
      * @param int $id
      * @return JsonResponse
      */
-    public function show(Request $request, int $id): JsonResponse
+    public function show(int $id): JsonResponse
     {
-        $category = $request->user()->categories()->find($id);
+        $category = Category::findOrFail($id);
 
         if (!$category) {
             return response()->json(['message' => 'Category not found.'], 404);

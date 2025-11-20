@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\AvailabilityController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -21,5 +22,11 @@ Route::prefix('v1')->group(function () {
        Route::post('categories', [CategoryController::class, 'store']);
        Route::put('categories/{id}', [CategoryController::class, 'update']);
        Route::delete('categories/{id}', [CategoryController::class, 'destroy']);
+
+        Route::get('availabilities', [AvailabilityController::class, 'index']);
+        Route::get('availabilities/{id}', [AvailabilityController::class, 'show']);
+        Route::post('availabilities', [AvailabilityController::class, 'store']);
+        Route::put('availabilities/{id}', [AvailabilityController::class, 'update']);
+        Route::delete('availabilities/{id}', [AvailabilityController::class, 'destroy']);
     });
 });

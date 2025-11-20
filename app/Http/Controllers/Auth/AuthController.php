@@ -2,48 +2,40 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Actions\Auth\RegisterAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserRegisterRequest;
-use App\Models\User;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\RegisterRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Log;
+use App\Actions\Auth\LoginAction;
 
 class AuthController extends Controller
 {
     /**
      * Handle user login
-     * @param Request $request
+     * @param LoginRequest $request
+     * @param LoginAction $loginAction
      * @return JsonResponse
      */
-    public function login(Request $request): JsonResponse
+    public function login(LoginRequest $request, LoginAction $loginAction): JsonResponse
     {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
+        $data = $loginAction->handle($request);
 
-        $user = User::where('email', $request->email)->first();
-
-        $token = $user->createToken('login-token')->plainTextToken;
-
-        return response()->json(['token' => $token, 'user' => $user], 200);
+        return response()->json(['token' => $data['token'], 'user' => $data['user']], 200);
     }
 
     /**
      * Handle user register
-     * @param Request $request
+     * @param RegisterRequest $request
+     * @param RegisterAction $registerAction
      * @return JsonResponse
      */
-    public function register(UserRegisterRequest $request): JsonResponse
+    public function register(RegisterRequest $request, RegisterAction $registerAction): JsonResponse
     {
-        $request->validated();
+        $data = $registerAction->handle($request);
 
-        $user = $request->createUser($request);
-
-        $token = $user->createToken('register-token')->plainTextToken;
-
-        return response()->json(['message' => 'User registered successfully.', 'user' => $user, 'token' => $token], 200);
+        return response()->json(['message' => 'User registered successfully.', 'user' => $data['user'], 'token' => $data['token']], 200);
     }
 
     public function logout(Request $request): JsonResponse

@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Panel;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Category;
 
-class StoreCategoryRequest extends FormRequest
+class CategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,24 +22,11 @@ class StoreCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:50'
         ];
     }
 
-
     /**
-     * Create a new category instance after a valid request.
-     *
-     * @return \App\Models\Category
-     */
-    public function createCategory(): Category
-    {
-        return Category::create([
-            'name' => $this->input('name'),
-        ]);
-    }
-
-     /**
      * Get custom messages for validator errors.
      *
      * @return array<string, string>
@@ -50,7 +36,7 @@ class StoreCategoryRequest extends FormRequest
         return [
             'name.required' => 'The category name is required.',
             'name.string' => 'The category name must be a string.',
-            'name.max' => 'The category name may not be greater than 255 characters.',
+            'name.max' => 'The category name may not be greater than 50 characters.',
         ];
     }
 }

@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\Panel\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -41,14 +40,16 @@ class CategoryController extends Controller
     /**
      * Store a newly created category in storage.
      *
-     * @param StoreCategoryRequest $request
+     * @param CategoryRequest $request
      * @return JsonResponse
      */
-    public function store(StoreCategoryRequest $request): JsonResponse
+    public function store(CategoryRequest $request): JsonResponse
     {
         $request->validated();
 
-        $category = $request->createCategory();
+        $category = Category::create([
+            'name' => $request->name,
+        ]);
 
         return response()->json(['message' => 'Category created successfully.', 'category' => $category], 201);
     }
@@ -56,37 +57,33 @@ class CategoryController extends Controller
     /**
      * Update the specified category in storage.
      *
-     * @param Request $request
+     * @param CategoryRequest $request
      * @param int $id
      * @return JsonResponse
      */
-    public function update(Request $request, int $id): JsonResponse
+    public function update(CategoryRequest $request, int $id): JsonResponse
     {
-        $category = $request->user()->categories()->find($id);
+        $category = Category::findOrFail($id);
 
         if (!$category) {
-            return response()->json(['message' => 'Category not found.'], 404);
+            return response()->json(['message' => 'Category not found.']);
         }
 
-        $request->validate([
-            'name' => 'required|string|max:255',
+        $category->update([
+            'name' => $request->name,
         ]);
-
-        $category->name = $request->input('name');
-        $category->save();
 
         return response()->json(['message' => 'Category updated successfully.', 'category' => $category], 200);
     }
+
     /**
      * Remove the specified category from storage.
-     *
-     * @param Request $request
      * @param int $id
      * @return JsonResponse
      */
-    public function destroy(Request $request, int $id): JsonResponse
+    public function destroy(int $id): JsonResponse
     {
-        $category = $request->user()->categories()->find($id);
+        $category = Category::findOrFail($id);
 
         if (!$category) {
             return response()->json(['message' => 'Category not found.'], 404);

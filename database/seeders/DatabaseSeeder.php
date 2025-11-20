@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(
             CategoriesSeeder::class,
+            AvailabilitySeeder::class,
         );
     }
 }

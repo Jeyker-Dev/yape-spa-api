@@ -20,6 +20,8 @@ class RegisterAction
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password,
+            'phone' => $request->phone,
+            'identity_card' => $request->identity_card,
         ]);
 
         $token = $user->createToken('register-token')->plainTextToken;

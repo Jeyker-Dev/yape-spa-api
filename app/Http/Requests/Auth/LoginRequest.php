@@ -26,4 +26,22 @@ class LoginRequest extends FormRequest
             'password' => 'required|string|min:8|exists:users,password',
         ];
     }
+
+    /**
+     * Get custom error messages for validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'email.required' => 'The email field is required.',
+            'email.email' => 'The email must be a valid email address.',
+            'email.exists' => 'The provided email does not exist in our records.',
+            'password.required' => 'The password field is required.',
+            'password.string' => 'The password must be a string.',
+            'password.min' => 'The password must be at least 8 characters long.',
+            'password.exists' => 'The provided password is incorrect.',
+        ];
+    }
 }

@@ -28,6 +28,30 @@ it('login a user', function () {
         ]);
 });
 
+it('checks user cannot login with wrong email', function () {
+    $user = User::factory()->create();
+
+    $response = $this->postJson('/api/v1/login', [
+        'email' => 'testbad@example',
+        'password' => 'password',
+    ]);
+
+    $response->assertStatus(422)
+    ->assertJsonValidationErrors(['email']);
+});
+
+it('checks user cannot login with wrong password', function () {
+    $user = User::factory()->create();
+
+    $response = $this->postJson('/api/v1/login', [
+        'email' => $user->email,
+        'password' => 'wrongpassword',
+    ]);
+
+    $response->assertStatus(401)
+    ->assertSeeText('The provided credentials are incorrect.');
+});
+
 it('registers a new user', function () {
     $response = $this->postJson('/api/v1/register', [
         'name' => 'Test User',

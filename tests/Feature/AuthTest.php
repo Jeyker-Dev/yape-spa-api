@@ -76,3 +76,21 @@ it('registers a new user', function () {
         ]);
 });
 
+it('log out a user', function () {
+    $user = User::factory()->create();
+
+    $response = $this->postJson('/api/v1/login', [
+        'email' => $user->email,
+        'password' => 'password',
+    ]);
+
+    $token = $response->json('token');
+
+    $logoutResponse = $this->withHeaders([
+        'Authorization' => 'Bearer ' . $token,
+    ])->postJson('/api/v1/logout');
+
+    $logoutResponse->assertStatus(200)
+        ->assertSeeText('Session Closed');
+});
+

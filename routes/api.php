@@ -28,5 +28,7 @@ Route::prefix('v1')->group(function () {
         Route::post('availabilities', [AvailabilityController::class, 'store']);
         Route::put('availabilities/{id}', [AvailabilityController::class, 'update']);
         Route::delete('availabilities/{id}', [AvailabilityController::class, 'destroy']);
+
+
     });
 });

@@ -8,7 +8,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Availability extends Model
 {
-    use HasFactory, HasApiTokens;
+    use HasFactory;
 
     protected $fillable = [
         'day_of_week',

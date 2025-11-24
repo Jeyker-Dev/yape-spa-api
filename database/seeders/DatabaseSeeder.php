@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             [
                 CategoriesSeeder::class,
                 AvailabilitySeeder::class,
+                ServiceSeeder::class,
             ]
         );
     }

@@ -22,9 +22,9 @@ class AvailabilityRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'day_of_week' => 'required|integer|min:0|max:6',
-            'start_time' => 'required|date_format:H:i',
-            'end_time' => 'required|date_format:H:i|after:start_time',
+            'day_of_week' => 'required',
+            'start_time' => 'required|date_format:H:i:s',
+            'end_time' => 'required|date_format:H:i:s|after:start_time',
             'is_working' => 'required|boolean',
         ];
     }

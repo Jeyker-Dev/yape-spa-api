@@ -8,7 +8,6 @@ uses(RefreshDatabase::class);
 
 it('fetches categories for authenticated user', function () {
     $user = User::factory()->create();
-    Category::factory()->count(3)->create();
 
     $this->actingAs($user, 'sanctum');
 

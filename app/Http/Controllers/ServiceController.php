@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Panel\ServiceRequest;
 use App\Models\Service;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Js;
 
 class ServiceController extends Controller
 {

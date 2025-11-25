@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
                 ServicesSeeder::class,
                 PaymentMethodsSeeder::class,
                 AppointmentsSeeder::class,
+                NotificationsSeeder::class,
             ]
         );
     }

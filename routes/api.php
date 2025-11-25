@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AvailabilityController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\PaymentMethodController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -35,5 +36,11 @@ Route::prefix('v1')->group(function () {
         Route::post('services', [ServiceController::class, 'store']);
         Route::put('services/{id}', [ServiceController::class, 'update']);
         Route::delete('services/{id}', [ServiceController::class, 'destroy']);
+
+        Route::get('payment-methods', [PaymentMethodController::class, 'index']);
+        Route::get('payment-methods/{id}', [PaymentMethodController::class, 'show']);
+        Route::post('payment-methods', [PaymentMethodController::class, 'store']);
+        Route::put('payment-methods/{id}', [PaymentMethodController::class, 'update']);
+        Route::delete('payment-methods/{id}', [PaymentMethodController::class, 'destroy']);
     });
 });

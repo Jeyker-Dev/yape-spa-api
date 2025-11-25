@@ -24,8 +24,8 @@ class NotificationFactory extends Factory
             'type' => $this->faker->randomElement(['reminder', 'confirmation', 'cancellation']),
             'message' => $this->faker->sentence(),
             'sent_at' => $this->faker->dateTimeBetween('-1 month', 'now'),
-            'is_new' => $this->faker->boolean(70),
-            'is_read' => $this->faker->boolean(50),
+            'is_new' => true,
+            'is_read' => false,
         ];
     }
 }

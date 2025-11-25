@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
                 AvailabilitySeeder::class,
                 ServicesSeeder::class,
                 PaymentMethodsSeeder::class,
+                AppointmentsSeeder::class,
             ]
         );
     }

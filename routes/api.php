@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AvailabilityController;
+use App\Http\Controllers\ServiceController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -29,6 +30,10 @@ Route::prefix('v1')->group(function () {
         Route::put('availabilities/{id}', [AvailabilityController::class, 'update']);
         Route::delete('availabilities/{id}', [AvailabilityController::class, 'destroy']);
 
-
+        Route::get('services', [ServiceController::class, 'index']);
+        Route::get('services/{id}', [ServiceController::class, 'show']);
+        Route::post('services', [ServiceController::class, 'store']);
+        Route::put('services/{id}', [ServiceController::class, 'update']);
+        Route::delete('services/{id}', [ServiceController::class, 'destroy']);
     });
 });

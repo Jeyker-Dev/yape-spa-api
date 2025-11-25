@@ -48,5 +48,11 @@ Route::prefix('v1')->group(function () {
         Route::post('appointments', [App\Http\Controllers\AppointmentController::class, 'store']);
         Route::put('appointments/{id}', [App\Http\Controllers\AppointmentController::class, 'update']);
         Route::delete('appointments/{id}', [App\Http\Controllers\AppointmentController::class, 'destroy']);
+
+        Route::get('notifications', [App\Http\Controllers\NotificationController::class, 'index']);
+        Route::get('notifications/{id}', [App\Http\Controllers\NotificationController::class, 'show']);
+        Route::post('notifications', [App\Http\Controllers\NotificationController::class, 'store']);
+        Route::put('notifications/{id}', [App\Http\Controllers\NotificationController::class, 'update']);
+        Route::delete('notifications/{id}', [App\Http\Controllers\NotificationController::class, 'destroy']);
     });
 });

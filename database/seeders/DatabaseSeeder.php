@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
                 CategoriesSeeder::class,
                 AvailabilitySeeder::class,
                 ServicesSeeder::class,
+                PaymentMethodsSeeder::class,
             ]
         );
     }

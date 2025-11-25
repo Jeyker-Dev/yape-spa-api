@@ -42,5 +42,11 @@ Route::prefix('v1')->group(function () {
         Route::post('payment-methods', [PaymentMethodController::class, 'store']);
         Route::put('payment-methods/{id}', [PaymentMethodController::class, 'update']);
         Route::delete('payment-methods/{id}', [PaymentMethodController::class, 'destroy']);
+
+        Route::get('appointments', [App\Http\Controllers\AppointmentController::class, 'index']);
+        Route::get('appointments/{id}', [App\Http\Controllers\AppointmentController::class, 'show']);
+        Route::post('appointments', [App\Http\Controllers\AppointmentController::class, 'store']);
+        Route::put('appointments/{id}', [App\Http\Controllers\AppointmentController::class, 'update']);
+        Route::delete('appointments/{id}', [App\Http\Controllers\AppointmentController::class, 'destroy']);
     });
 });
